@@ -9,7 +9,7 @@ In this hands-on exercise, I learn how to import and wrangling geospatial data i
 
 ## Getting Started
 
-The code chunk below install and load sf and tidyverse packages into R environment.
+The code chunk below install and load [sf](https://r-spatial.github.io/sf/) and [tidyverse](https://www.tidyverse.org/) packages into R environment.
 
 ```{r}
 pacman::p_load(sf, tidyverse)
@@ -17,13 +17,109 @@ pacman::p_load(sf, tidyverse)
 
 ## Importing Geospatial Data
 
-### Importing polygon feature data 
+### Importing polygon feature data
+
+1.  `MP14_SUBZONE_WEB_PL`, a polygon feature layer in ESRI shapefile format
 
 ```{r}
 mpsz = st_read(dsn = "data/geospatial", 
                   layer = "MP14_SUBZONE_WEB_PL")
 ```
 
-```{r}
+2.  `CyclingPath`, a line feature layer in ESRI shapefile format
 
+```{r}
+cyclingpath = st_read(dsn = "data/geospatial", 
+                         layer = "CyclingPathGazette")
 ```
+
+3.  `PreSchool`, a point feature layer in kml file format
+
+```{r}
+preschool = st_read("data/geospatial/PreSchoolsLocation.kml")
+```
+
+### Checking content of a simple dataframe
+
+1.  Working with st_geometry()
+
+```{r}
+st_geometry(mpsz)
+```
+
+2.  Working with glimpse()
+
+```{r}
+glimpse(mpsz)
+```
+
+3.  Working with head()
+
+```{r}
+head(mpsz, n=5) 
+```
+
+### Plotting Geospatial Data
+
+1.  Using plot - Default plot of an object is a multi-plot of all attributes, up to a reasonable maximum as shown below
+
+```{r}
+plot(mpsz)
+```
+
+2.  Choose only the geometry
+
+```{r}
+plot(st_geometry(mpsz))
+```
+
+3.  Plot sf using special attributes
+
+```{r}
+plot(mpsz["PLN_AREA_N"])
+```
+
+### Assigning EPSG code to a simple feature data frame
+
+This is an example the coordinate system of `mpsz` simple feature data frame by using *st_crs()* of *sf* package as shown in the code chunk below.
+
+```{r}
+st_crs(mpsz)
+```
+
+Wrong EPSG code because the correct EPSG code for svy21 should be [3414](https://epsg.io/3414)
+
+```{r}
+mpsz3414 <- st_set_crs(mpsz, 3414)
+```
+
+Check the CSR again
+
+```{r}
+st_crs(mpsz3414)
+```
+
+### Transforming the projection of preschool from wgs84 to svy21
+
+Let us perform the projection transformation by using the code chunk below.
+
+1.  Print head of preschool
+
+```{r}
+head(preschool, n=5)
+```
+
+2.  Transform the data
+
+```{r}
+preschool3414 <- st_transform(preschool, 
+                              crs = 3414)
+```
+
+3.  Display data
+
+```{r}
+head(preschool3414, n=5)
+```
+
+## Importing the aspatial data
