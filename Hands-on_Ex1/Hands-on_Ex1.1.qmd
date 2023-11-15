@@ -1,6 +1,8 @@
 ---
 title: "Hands-on Exercise 1: Geospatial Data Wrangling with R"
 editor: visual
+date: 2023-11-15
+date-format: long
 ---
 
 ## Overview
@@ -206,4 +208,57 @@ summary(mpsz3414$`PreSch Count`)
 
 ```{r}
 top_n(mpsz3414, 1, `PreSch Count`)
+```
+
+\*\*DIY: Calculate the density of pre-school by planning subzone.
+
+1.  Firstly, the code chunk below uses [*st_area()*](https://r-spatial.github.io/sf/reference/geos_measures.html) of **sf** package to derive the area of each planning subzone.
+
+```{r}
+mpsz3414$Area <- mpsz3414 %>%
+  st_area()
+```
+
+2.  Next, [*mutate()*](https://dplyr.tidyverse.org/reference/mutate.html) of [**dplyr**](https://dplyr.tidyverse.org/) package is used to compute the density by using the code chunk below.
+
+```{r}
+mpsz3414 <- mpsz3414 %>%
+  mutate(`PreSch Density` = `PreSch Count`/Area * 1000000)
+```
+
+## Explorotary Data Analysis (EDA)
+
+Firstly, we will plot a histogram to reveal the distribution of `PreSch Density`. Conventionally, *hist()* of R Graphics will be used as shown in the code chunk below.
+
+```{r}
+hist(mpsz3414$`PreSch Density`)
+```
+
+In the code chunk below, appropriate **ggplot2** functions will be used.
+
+```{r}
+ggplot(data=mpsz3414, 
+       aes(x= as.numeric(`PreSch Density`)))+
+  geom_histogram(bins=20, 
+                 color="black", 
+                 fill="light blue") +
+  labs(title = "Are pre-school even distributed in Singapore?",
+       subtitle= "There are many planning sub-zones with a single pre-school, on the other hand, \nthere are two planning sub-zones with at least 20 pre-schools",
+      x = "Pre-school density (per km sq)",
+      y = "Frequency")
+```
+
+\*\* Using ggplot2 method, plot a scatterplot showing the relationship between Pre-school Density and Pre-school Count.
+
+```{r}
+ggplot(data=mpsz3414, 
+       aes(y = `PreSch Count`, 
+           x= as.numeric(`PreSch Density`)))+
+  geom_point(color="black", 
+             fill="light blue") +
+  xlim(0, 40) +
+  ylim(0, 40) +
+  labs(title = "",
+      x = "Pre-school density (per km sq)",
+      y = "Pre-school count")
 ```
