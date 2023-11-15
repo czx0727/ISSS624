@@ -2,8 +2,4 @@
 title: "About"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+View more to learn my learning journey for ISSS624 Applied Geospatial Analytics
