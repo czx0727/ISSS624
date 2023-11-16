@@ -336,10 +336,6 @@ tm_shape(mpsz_pop2020)+
 
 \*\* To reset to default
 
-```{r}
-tmap_style("white")
-```
-
 ### **Drawing Small Multiple Choropleth Maps**
 
 #### By assigning multiple values to at least one of the aesthetic arguments
