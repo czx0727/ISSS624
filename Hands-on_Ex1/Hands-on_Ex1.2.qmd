@@ -7,7 +7,7 @@ date-format: long
 
 # Overview
 
-In this hands-on exercise, I learn how to plot functional and truthful choropleth maps by using an R package called \*\*tmap\*\* package.
+In this hands-on exercise, I learn how to plot functional and truthful choropleth maps by using an R package called [tmap](https://cran.r-project.org/web/packages/tmap/) package.
 
 ## Getting Started
 
@@ -83,7 +83,7 @@ mutate(`DEPENDENCY` = (`YOUNG` + `AGED`)
        `TOTAL`, `DEPENDENCY`)
 ```
 
-####  Joining the attribute data and geospatial data
+#### Joining the attribute data and geospatial data
 
 I would convert the values in PA and SZ fields to uppercase
 
@@ -113,7 +113,7 @@ Read here to know more about [rds](https://search.r-project.org/CRAN/refmans/rea
 
 Two approaches can be used to prepare thematic map using *tmap*, they are:
 
--   Plotting a thematic map quickly by using *qtm()*.
+-   Plotting a thematic map quickly by using [*qtm()*](https://www.rdocumentation.org/packages/tmap/versions/3.3-4/topics/qtm).
 
 -   Plotting highly customisable thematic map by using tmap elements.
 
@@ -127,11 +127,11 @@ qtm(mpsz_pop2020,
 
 Things to learn from the code chunk above:
 
--   *tmap_mode()* with \"plot\" option is used to produce a static map. For interactive mode, \"view\" option should be used.
+-   *tmap_mode()* with "plot" option is used to produce a static map. For interactive mode, "view" option should be used.
 
 -   *fill* argument is used to map the attribute (i.e. DEPENDENCY)
 
-### **Creating a choropleth map by using *tmap*\'s elements**
+### **Creating a choropleth map by using *tmap*'s elements**
 
 ```{r}
 tm_shape(mpsz_pop2020)+
@@ -169,15 +169,15 @@ tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY")
 ```
 
-Things to learn from *tm_polygons()*:
+3 learning points from [*tm_polygons()*](https://rdrr.io/cran/tmap/man/tm_polygons.html):
 
--   The default interval binning used to draw the choropleth map is called \"pretty\". A detailed discussion of the data classification methods supported by **tmap** will be provided in sub-section 4.3.
+-   The default interval binning used to draw the choropleth map is called "pretty".
 
--   The default colour scheme used is `YlOrRd` of ColorBrewer. You will learn more about the color scheme in sub-section 4.4.
+-   The default colour scheme used is `YlOrRd` of ColorBrewer.
 
 -   By default, Missing value will be shaded in grey.
 
-####  Drawing a choropleth map using *tm_fill()* and \*tm_border()\*\*
+#### Drawing a choropleth map using *tm_fill()* and \*tm_border()\*\*
 
 ```{r}
 tm_shape(mpsz_pop2020)+
@@ -198,11 +198,11 @@ To notes: Beside *alpha* argument, there are three other arguments for *tm_borde
 
 -   *lwd* = border line width. The default is 1, and
 
--   *lty* = border line type. The default is \"solid\".
+-   *lty* = border line type. The default is "solid".
 
 ### **Data classification methods of tmap**
 
-**tmap** provides a total ten data classification methods, namely: *fixed*, *sd*, *equal*, *pretty* (default), *quantile*, *kmeans*, *hclust*, *bclust*, *fisher*, and *jenks*.
+[**tmap**](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) provides a total ten data classification methods, namely: *fixed*, *sd*, *equal*, *pretty* (default), *quantile*, *kmeans*, *hclust*, *bclust*, *fisher*, and *jenks*.
 
 #### Plotting choropleth maps with built-in classification methods
 
@@ -224,9 +224,31 @@ tm_shape(mpsz_pop2020)+
   tm_borders(alpha = 0.5)
 ```
 
-\*\*DIY
+-   Note that the distribution of quantile data classification method are more evenly distributed then equal data classification method.
 
-#### Plotting choropleth map with custome break
+DIY
+
+1.  Using k-means and 10 classes
+
+```{r}
+tm_shape(mpsz_pop2020)+
+  tm_fill("DEPENDENCY",
+          n = 10,
+          style = "kmeans") +
+  tm_borders(alpha = 0.5)
+```
+
+2.  Using hclust and 20 classes
+
+```{r}
+tm_shape(mpsz_pop2020)+
+  tm_fill("DEPENDENCY",
+          n = 20,
+          style = "hclust") +
+  tm_borders(alpha = 0.5)
+```
+
+#### Plotting choropleth map with custom break
 
 To get some descriptive analysis first
 
@@ -258,7 +280,7 @@ tm_shape(mpsz_pop2020)+
   tm_borders(alpha = 0.5)
 ```
 
-To reverse the colour shading, add a \"-\" prefix.
+To reverse the colour shading, add a "-" prefix.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
@@ -272,7 +294,7 @@ tm_shape(mpsz_pop2020)+
 
 #### Map Legend
 
-In **tmap**, several *legend* options are provided to change the placement, format and appearance of the legend.
+In **tmap**, several *legend* options are provided to change the placement, format and appearance of the legend.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
