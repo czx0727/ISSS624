@@ -21,6 +21,18 @@ pacman::p_load(sf, tidyverse)
 
 ### Importing polygon feature data
 
+Dataset used:
+
+-   Master Plan 2014 Subzone Boundary (Web) from [data.gov.sg](https://data.gov.sg/)
+
+-   Pre-Schools Location from [data.gov.sg](https://data.gov.sg/)
+
+-   Cycling Path from [LTADataMall](https://www.mytransport.sg/content/mytransport/home/dataMall.html)
+
+-   Latest version of Singapore Airbnb listing data from [Inside Airbnb](http://insideairbnb.com/get-the-data.html)
+
+Click [here](https://www.rdocumentation.org/packages/sf/versions/0.2-2/topics/st_read) to know more about st_read()
+
 1.  `MP14_SUBZONE_WEB_PL`, a polygon feature layer in ESRI shapefile format
 
 ```{r}
@@ -43,19 +55,19 @@ preschool = st_read("data/geospatial/PreSchoolsLocation.kml")
 
 ### Checking content of a simple dataframe
 
-1.  Working with st_geometry()
+1.  Working with [st_geometry()](asic%20information%20of%20the%20feature%20class%20such%20as%20type%20of%20geometry,%20the%20geographic%20extent%20of%20the%20features%20and%20the%20coordinate%20system%20of%20the%20data)
 
 ```{r}
 st_geometry(mpsz)
 ```
 
-2.  Working with glimpse()
+2.  Working with [glimpse()](https://www.rdocumentation.org/packages/tibble/versions/3.0.1/topics/glimpse)
 
 ```{r}
 glimpse(mpsz)
 ```
 
-3.  Working with head()
+3.  Working with [head()](https://www.digitalocean.com/community/tutorials/head-and-tail-function-r)
 
 ```{r}
 head(mpsz, n=5) 
@@ -83,7 +95,7 @@ plot(mpsz["PLN_AREA_N"])
 
 ### Assigning EPSG code to a simple feature data frame
 
-This is an example the coordinate system of `mpsz` simple feature data frame by using *st_crs()* of *sf* package as shown in the code chunk below.
+This is an example the coordinate system of `mpsz` simple feature data frame by using [*st_crs()*](https://r-spatial.github.io/sf/reference/st_crs.html) of *sf* package as shown in the code chunk below.
 
 ```{r}
 st_crs(mpsz)
