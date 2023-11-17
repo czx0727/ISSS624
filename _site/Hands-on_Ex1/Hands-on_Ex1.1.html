@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-11-15">
 
-<title>ISSS624 - Hands-on Exercise 1.1: Geospatial Data Wrangling with R</title>
+<title>ISSS624 Geospatial Analytics Application - Hands-on Exercise 1.1: Geospatial Data Wrangling with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">ISSS624</span>
+    <span class="navbar-title">ISSS624 Geospatial Analytics Application</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -128,7 +128,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../Hands-on_Ex1/Hands-on_Ex1.1.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 1.1</span></a>
   </li>  
-        <li class="dropdown-header">Hands-on Exercise 1.2</li>
+        <li>
+    <a class="dropdown-item" href="../Hands-on_Ex1/Hands-on_Ex1.2.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 1.2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">In-class Exercises</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercises">    
+        <li class="dropdown-header">In-class Exercise 1</li>
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Take-home Exercises</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercises">    
+        <li class="dropdown-header">Take-home Exercise 1</li>
     </ul>
   </li>
 </ul>
@@ -222,6 +241,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="importing-geospatial-data">Importing Geospatial Data</h2>
 <section id="importing-polygon-feature-data" class="level3">
 <h3 class="anchored" data-anchor-id="importing-polygon-feature-data">Importing polygon feature data</h3>
+<p>Dataset used:</p>
+<ul>
+<li><p>Master Plan 2014 Subzone Boundary (Web) from <a href="https://data.gov.sg/">data.gov.sg</a></p></li>
+<li><p>Pre-Schools Location from <a href="https://data.gov.sg/">data.gov.sg</a></p></li>
+<li><p>Cycling Path from <a href="https://www.mytransport.sg/content/mytransport/home/dataMall.html">LTADataMall</a></p></li>
+<li><p>Latest version of Singapore Airbnb listing data from <a href="http://insideairbnb.com/get-the-data.html">Inside Airbnb</a></p></li>
+</ul>
+<p>Click <a href="https://www.rdocumentation.org/packages/sf/versions/0.2-2/topics/st_read">here</a> to know more about st_read()</p>
 <ol type="1">
 <li><code>MP14_SUBZONE_WEB_PL</code>, a polygon feature layer in ESRI shapefile format</li>
 </ol>
@@ -277,7 +304,7 @@ Geodetic CRS:  WGS 84</code></pre>
 <section id="checking-content-of-a-simple-dataframe" class="level3">
 <h3 class="anchored" data-anchor-id="checking-content-of-a-simple-dataframe">Checking content of a simple dataframe</h3>
 <ol type="1">
-<li>Working with st_geometry()</li>
+<li>Working with <a href="asic information of the feature class such as type of geometry, the geographic extent of the features and the coordinate system of the data">st_geometry()</a></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -306,7 +333,7 @@ First 5 geometries:</code></pre>
 </div>
 </div>
 <ol start="2" type="1">
-<li>Working with glimpse()</li>
+<li>Working with <a href="https://www.rdocumentation.org/packages/tibble/versions/3.0.1/topics/glimpse">glimpse()</a></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -332,7 +359,7 @@ $ geometry   &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((31495.56 30..., MULTIPOLYG
 </div>
 </div>
 <ol start="3" type="1">
-<li>Working with head()</li>
+<li>Working with <a href="https://www.digitalocean.com/community/tutorials/head-and-tail-function-r">head()</a></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpsz, <span class="at">n=</span><span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -399,7 +426,7 @@ all</code></pre>
 </section>
 <section id="assigning-epsg-code-to-a-simple-feature-data-frame" class="level3">
 <h3 class="anchored" data-anchor-id="assigning-epsg-code-to-a-simple-feature-data-frame">Assigning EPSG code to a simple feature data frame</h3>
-<p>This is an example the coordinate system of&nbsp;<code>mpsz</code>&nbsp;simple feature data frame by using&nbsp;<em>st_crs()</em>&nbsp;of&nbsp;<em>sf</em>&nbsp;package as shown in the code chunk below.</p>
+<p>This is an example the coordinate system of&nbsp;<code>mpsz</code>&nbsp;simple feature data frame by using&nbsp;<a href="https://r-spatial.github.io/sf/reference/st_crs.html"><em>st_crs()</em></a>&nbsp;of&nbsp;<em>sf</em>&nbsp;package as shown in the code chunk below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
