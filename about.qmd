@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-View more to learn my learning journey for ISSS624 Applied Geospatial Analytics
+I am Zhixuan! View more to learn my learning journey for ISSS624 Applied Geospatial Analytics
